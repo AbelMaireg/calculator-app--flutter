@@ -16,6 +16,20 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
   bool isScientificMode = false;
   bool isScientificModeShift = false;
 
+  late TextEditingController _expressionController;
+
+  @override
+  void initState() {
+    super.initState();
+    _expressionController = TextEditingController(text: expression);
+  }
+
+  @override
+  void dispose() {
+    _expressionController.dispose();
+    super.dispose();
+  }
+
   void onButtonPressed(String text) {
     setState(() {
       if (text == 'C') {
@@ -54,6 +68,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
           expression += text;
         }
       }
+      _expressionController.text = expression;
     });
   }
 
@@ -92,10 +107,15 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    expression,
-                    style: const TextStyle(fontSize: 24, color: Colors.grey),
-                  ),
+                  TextField(
+                      controller: _expressionController,
+                      style: const TextStyle(fontSize: 24, color: Colors.grey),
+                      onChanged: (value) {
+                        setState(() {
+                          expression = value;
+                        });
+                      },
+                      textAlign: TextAlign.right),
                   const SizedBox(height: 10),
                   Text(
                     result,
@@ -193,7 +213,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
             _buildButton('cos'),
             _buildButton('tan'),
             _buildButton('shift',
-                icon: Icons.filter_tilt_shift, bgColor: Colors.red)
+                icon: Icons.filter_tilt_shift, bgColor: Colors.green)
           ],
         ),
         Row(
@@ -228,7 +248,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
             _buildButton('arccos'),
             _buildButton('arctan'),
             _buildButton('shift',
-                icon: Icons.filter_tilt_shift, bgColor: Colors.green)
+                icon: Icons.filter_tilt_shift, bgColor: Colors.red)
           ],
         ),
         Row(
