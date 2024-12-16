@@ -266,9 +266,9 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('sin'),
-            _buildButton('cos'),
-            _buildButton('tan'),
+            _buildButton('%'),
+            _buildButton('abs'),
+            _buildButton('ln'),
             _buildButton('shift',
                 icon: Icons.filter_tilt_shift, bgColor: Colors.green)
           ],
@@ -278,7 +278,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
           children: [
             _buildButton('√'),
             _buildButton('^'),
-            _buildButton('!'),
+            _buildButton('INV'),
             _buildButton('π')
           ],
         ),
@@ -301,9 +301,9 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('arcsin'),
-            _buildButton('arccos'),
-            _buildButton('arctan'),
+            _buildButton('sin'),
+            _buildButton('cos'),
+            _buildButton('tan'),
             _buildButton('shift',
                 icon: Icons.filter_tilt_shift, bgColor: Colors.red)
           ],
@@ -311,19 +311,19 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('sinh'),
-            _buildButton('cosh'),
-            _buildButton('tanh'),
+            _buildButton('arcsin'),
+            _buildButton('arccos'),
+            _buildButton('arctan'),
             _buildButton('smtg')
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('%'),
-            _buildButton('abs'),
-            _buildButton('ln'),
-            _buildButton('INV')
+            _buildButton('csc'),
+            _buildButton('sec'),
+            _buildButton('cot'),
+            _buildButton('!'),
           ],
         ),
       ],
