@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'constants.dart';
+import 'package:flutter/services.dart';
+import 'package:app/constants.dart';
 
 class ScientificCalculator extends StatefulWidget {
   final VoidCallback toggleTheme;
@@ -15,6 +16,11 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
   String result = '0';
   bool isScientificMode = false;
   bool isScientificModeShift = false;
+  final List<(int, String)> history = [
+    (1, pi.toString().substring(0, 10)),
+    (2, e_num.toString().substring(0, 10))
+  ];
+  int historyId = 3;
 
   late TextEditingController _expressionController;
 
@@ -56,6 +62,10 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
               ));
           ContextModel cm = ContextModel();
           result = '${exp.evaluate(EvaluationType.REAL, cm)}';
+          setState(() {
+            historyId += 1;
+            history.add((historyId, result));
+          });
         } catch (e) {
           result = 'Error';
         }
@@ -99,6 +109,53 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: 100,
+            child: Column(
+              children: history.reversed.take(2).map((item) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 5.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          setState(() {
+                            history.removeWhere((fi) => item.$1 == fi.$1);
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        icon: const Icon(Icons.copy),
+                        onPressed: () {
+                          Clipboard.setData(ClipboardData(text: item.$2));
+                        },
+                      ),
+                      const SizedBox(width: 20),
+                      IconButton(
+                        icon: const Icon(Icons.input),
+                        onPressed: () {
+                          expression = item.$2;
+                          _expressionController.text = item.$2;
+                        },
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: Text(
+                          item.$2,
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(16),
