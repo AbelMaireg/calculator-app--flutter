@@ -22,6 +22,9 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
   ];
   int historyId = 3;
 
+  Color basicOps = Colors.lightBlue;
+  Color sciOps = const Color.fromRGBO(13, 60, 125, 1);
+
   late TextEditingController _expressionController;
 
   @override
@@ -98,11 +101,12 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scientific Calculator'),
+        title: const Text('Calculator'),
         centerTitle: true,
+        backgroundColor: sciOps,
         actions: [
           IconButton(
-            icon: const Icon(Icons.brightness_6),
+            icon: const Icon(Icons.brightness_2),
             onPressed: widget.toggleTheme,
           ),
         ],
@@ -219,7 +223,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
             _buildButton('7'),
             _buildButton('8'),
             _buildButton('9'),
-            _buildButton('÷')
+            _buildButton('÷', bgColor: basicOps)
           ],
         ),
         Row(
@@ -228,7 +232,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
             _buildButton('4'),
             _buildButton('5'),
             _buildButton('6'),
-            _buildButton('×')
+            _buildButton('×', bgColor: basicOps)
           ],
         ),
         Row(
@@ -237,7 +241,7 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
             _buildButton('1'),
             _buildButton('2'),
             _buildButton('3'),
-            _buildButton('-')
+            _buildButton('-', bgColor: basicOps)
           ],
         ),
         Row(
@@ -246,13 +250,13 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
             _buildButton('0'),
             _buildButton('.'),
             _buildButton('='),
-            _buildButton('+')
+            _buildButton('+', bgColor: basicOps)
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('C'),
+            _buildButton('C', icon: Icons.clear),
             _buildButton('backspace', icon: Icons.backspace)
           ],
         ),
@@ -266,9 +270,9 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('%'),
-            _buildButton('abs'),
-            _buildButton('ln'),
+            _buildButton('%', bgColor: sciOps),
+            _buildButton('abs', bgColor: sciOps),
+            _buildButton('ln', bgColor: sciOps),
             _buildButton('shift',
                 icon: Icons.filter_tilt_shift, bgColor: Colors.green)
           ],
@@ -276,19 +280,19 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('√'),
-            _buildButton('^'),
-            _buildButton('INV'),
-            _buildButton('π')
+            _buildButton('√', bgColor: sciOps),
+            _buildButton('^', bgColor: sciOps),
+            _buildButton('INV', bgColor: sciOps),
+            _buildButton('π', bgColor: sciOps)
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('('),
-            _buildButton(')'),
-            _buildButton('log'),
-            _buildButton('e')
+            _buildButton('(', bgColor: sciOps),
+            _buildButton(')', bgColor: sciOps),
+            _buildButton('log', bgColor: sciOps),
+            _buildButton('e', bgColor: sciOps)
           ],
         ),
       ],
@@ -301,9 +305,9 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('sin'),
-            _buildButton('cos'),
-            _buildButton('tan'),
+            _buildButton('sin', bgColor: sciOps),
+            _buildButton('cos', bgColor: sciOps),
+            _buildButton('tan', bgColor: sciOps),
             _buildButton('shift',
                 icon: Icons.filter_tilt_shift, bgColor: Colors.red)
           ],
@@ -311,19 +315,19 @@ class ScientificCalculatorState extends State<ScientificCalculator> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('arcsin'),
-            _buildButton('arccos'),
-            _buildButton('arctan'),
-            _buildButton('smtg')
+            _buildButton('arcsin', bgColor: sciOps),
+            _buildButton('arccos', bgColor: sciOps),
+            _buildButton('arctan', bgColor: sciOps),
+            _buildButton('smtg', bgColor: sciOps)
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildButton('csc'),
-            _buildButton('sec'),
-            _buildButton('cot'),
-            _buildButton('!'),
+            _buildButton('csc', bgColor: sciOps),
+            _buildButton('sec', bgColor: sciOps),
+            _buildButton('cot', bgColor: sciOps),
+            _buildButton('!', bgColor: sciOps),
           ],
         ),
       ],
